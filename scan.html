@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Your Food | HealthyMe</title>
+    <link rel="stylesheet" href="scan.css">
+    <script src="scan.js" defer></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo"><span>Healthy</span>Me</a>
+
+        <nav>
+            <a href="/index/index.html">Home</a>
+            <a href="../scan/scan.html" class="active">Scan Food</a>
+            <a href="/nutrition/nutrition.html">My Nutrition</a>
+            <a href="profile.html">Profile</a>
+            <a href="/login/login.html" class="logout">Login</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow">SCAN · ANALYZE · EAT BETTER</p>
+            <h1>Scan Your <span>Food</span></h1>
+            <p class="hero-description">
+                Discover what's on your plate. Upload or take a photo
+                of your meal to explore its nutrients.
+            </p>
+        </section>
+
+        <section class="dashboard">
+
+            <div class="card upload-card">
+
+                <div class="camera-circle">
+                    <span>📸</span>
+                </div>
+
+                <h2>Upload or Take a Photo</h2>
+
+                <p class="muted">
+                    Choose a clear photo of your food for nutritional analysis.
+                </p>
+
+                <!-- Live camera preview -->
+                <div id="cameraBox" hidden>
+                    <video
+                        id="cameraVideo"
+                        autoplay
+                        playsinline
+                        muted
+                    ></video>
+
+                    <div class="camera-controls">
+                        <button type="button" id="captureBtn" class="btn primary">
+                            Capture Photo
+                        </button>
+
+                        <button type="button" id="closeCameraBtn" class="btn secondary">
+                            Close Camera
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Selected image preview -->
+                <div class="image-preview" id="imagePreview">
+                    <div id="emptyPreview">
+                        <span class="upload-icon">↑</span>
+                        <p>Your food image will appear here</p>
+                        <small>JPG, PNG or WEBP</small>
+                    </div>
+
+                    <img
+                        id="previewImage"
+                        alt="Selected food preview"
+                        hidden
+                    >
+                </div>
+
+                <!-- Gallery upload -->
+                <input
+                    type="file"
+                    id="foodFile"
+                    accept="image/jpeg,image/png,image/webp"
+                    hidden
+                >
+
+                <!-- Buttons -->
+                <div class="upload-buttons">
+                    <button type="button" class="btn primary" id="cameraBtn">
+                        📷 Take Photo
+                    </button>
+
+                    <button type="button" class="btn secondary" id="uploadBtn">
+                        ↑ Upload Image
+                    </button>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn analyze-btn"
+                    id="analyzeBtn"
+                    disabled
+                >
+                    Analyze My Food
+                </button>
+
+                <button
+                    type="button"
+                    class="remove-btn"
+                    id="removeBtn"
+                    hidden
+                >
+                    Remove Image
+                </button>
+
+                <p class="status-message" id="statusMessage" role="status">
+                    For best results, use a clear photo with good lighting.
+                </p>
+
+                <div class="benefits">
+                    <div>
+                        <span>⚡</span>
+                        <p>Smart<br>Analysis</p>
+                    </div>
+                    <div>
+                        <span>♡</span>
+                        <p>Healthier<br>Choices</p>
+                    </div>
+                    <div>
+                        <span>✓</span>
+                        <p>Nutrition<br>Insights</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Nutrition results -->
+            <div class="card results-card">
+
+                <div class="results-header">
+                    <div>
+                        <p class="eyebrow">YOUR FOOD REPORT</p>
+                        <h2>Nutrition Information</h2>
+                    </div>
+
+                    <span class="serving-badge">Per serving</span>
+                </div>
+
+                <div class="food-result-image" id="resultImageBox">
+                    <span id="resultPlaceholder">🥗</span>
+
+                    <img
+                        id="resultImage"
+                        alt="Food being analyzed"
+                        hidden
+                    >
+
+                    <p id="resultCaption">
+                        Your scanned food will appear here
+                    </p>
+                </div>
+
+                <div class="nutrition-grid">
+
+                    <div class="nutrient">
+                        <span class="nutrient-icon calories">♨</span>
+                        <p>Calories</p>
+                        <strong id="calories">—</strong>
+                        <small>kcal</small>
+                    </div>
+
+                    <div class="nutrient">
+                        <span class="nutrient-icon protein">P</span>
+                        <p>Protein</p>
+                        <strong id="protein">—</strong>
+                        <small>g</small>
+                    </div>
+
+                    <div class="nutrient">
+                        <span class="nutrient-icon carbs">✳</span>
+                        <p>Carbs</p>
+                        <strong id="carbs">—</strong>
+                        <small>g</small>
+                    </div>
+
+                    <div class="nutrient">
+                        <span class="nutrient-icon fat">●</span>
+                        <p>Fat</p>
+                        <strong id="fat">—</strong>
+                        <small>g</small>
+                    </div>
+
+                </div>
+
+                <div class="extra-nutrients">
+                    <h3>Additional Nutrients</h3>
+
+                    <div class="nutrient-row">
+                        <span>🌿 Fiber</span>
+                        <strong id="fiber">—</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>💊 Vitamins</span>
+                        <strong id="vitamins">—</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>🪨 Minerals</span>
+                        <strong id="minerals">—</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>💧 Water content</span>
+                        <strong id="water">—</strong>
+                    </div>
+                </div>
+
+                <div class="food-insights">
+                    <h3>💚 Healthy Insights</h3>
+                    <p id="insights">
+                        Upload a food photo to get started with your nutrition report.
+                    </p>
+                </div>
+
+                <p class="disclaimer">
+                    Nutrition values are estimates and depend on portion size,
+                    ingredients and preparation method.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 HealthyMe · Better Food, Better Health</p>
+    </footer>
+
+</body>
+</html>
